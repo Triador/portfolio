@@ -1,0 +1,496 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="triador — software engineer" description="Делаю продукты, которые упрощают жизнь.">
+  <main>
+
+    <!-- NAV -->
+    <nav>
+      <span class="nav-logo">triador<span class="blink">_</span></span>
+      <div class="nav-links">
+        <a href="#projects">проекты</a>
+        <a href="https://github.com/triador" target="_blank" rel="noopener">github</a>
+        <span class="lang-switch">
+          <span class="lang-active">RU</span>
+          <span class="sep">/</span>
+          <a href={`${import.meta.env.BASE_URL}/en/`}>EN</a>
+        </span>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-label">👋 привет</p>
+        <h1 class="hero-title">Я <span class="accent">triador</span></h1>
+        <p class="hero-sub">
+          Делаю продукты, которые упрощают мне жизнь.<br/>
+          Возможно, они будут полезны и кому-то ещё.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Проекты</h2>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h3 class="project-name"><a href="https://t.me/TriadorFinanceManagerBot" target="_blank" rel="noopener">Finance Manager</a></h3>
+              <p class="project-tagline">Бот в Telegram для совместных расходов</p>
+            </div>
+            <div class="project-badge">
+              <span class="status-dot"></span> работает
+            </div>
+          </div>
+
+          <p class="project-desc">
+            Я сделал этого бота, чтобы упростить учёт совместных трат, когда мы путешествуем с друзьями, ходим куда-то вместе или просто делим общие расходы.
+            Удобнее всего пользоваться ботом добавив его в групповой чат.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <span class="feature-icon">💸</span>
+              <div>
+                <div class="feature-title">Учитывает расходы</div>
+                <div class="feature-desc">
+                  Можно просто отправить сумму или сумму с комментарием:
+                  <span class="example-tags">
+                    <code>1500</code><code>39.90 такси</code><code>24 + 32 + 20 кафе</code>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🧾</span>
+              <div>
+                <div class="feature-title">Распознаёт чеки</div>
+                <div class="feature-desc">Можно отправить фото чека и не вбивать покупки вручную.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔁</span>
+              <div>
+                <div class="feature-title">Убирает лишние переводы</div>
+                <div class="feature-desc">Оптимизирует долги так, чтобы между участниками было меньше лишних переводов.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📅</span>
+              <div>
+                <div class="feature-title">Хранит историю расходов</div>
+                <div class="feature-desc">Можно посмотреть расходы за любой месяц.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <a href={`${import.meta.env.BASE_URL}/ru/tech`} class="btn-secondary">технические детали →</a>
+            <a href="https://t.me/TriadorFinanceManagerBot" target="_blank" rel="noopener" class="btn-primary">открыть бота →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT CARD: grindbot -->
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h3 class="project-name"><a href="https://t.me/GridTeamBot" target="_blank" rel="noopener">Grindbot</a></h3>
+              <p class="project-tagline">Торговый бот для биржи Bybit</p>
+            </div>
+            <div class="project-badge">
+              <span class="status-dot"></span> работает
+            </div>
+          </div>
+
+          <p class="project-desc">
+            Я сделал этого бота, чтобы автоматизировать торговлю на криптовалютных биржах и не следить за рынком вручную.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <span class="feature-icon">📊</span>
+              <div>
+                <div class="feature-title">Работает по сетке</div>
+                <div class="feature-desc">Выставляет ордера на покупку и продажу по уровням в рамках сеточной стратегии.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🏦</span>
+              <div>
+                <div class="feature-title">Использует свободные средства</div>
+                <div class="feature-desc">Свободную часть баланса хранит на накопительном продукте биржи, чтобы максимизировать доход.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <a href={`${import.meta.env.BASE_URL}/ru/tech-grindbot`} class="btn-secondary">технические детали →</a>
+            <a href="https://t.me/GridTeamBot" target="_blank" rel="noopener" class="btn-primary">открыть бота →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT CARD: bookey -->
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h3 class="project-name"><a href="https://bookey.ru/" target="_blank" rel="noopener">Bookey</a></h3>
+              <p class="project-tagline">Сервис для ведения списка книг</p>
+            </div>
+            <div class="project-badge">
+              <span class="status-dot"></span> работает
+            </div>
+          </div>
+
+          <p class="project-desc">
+            Я сделал этот сервис, чтобы вести список книг — что читаю, что уже прочитал и что хочу прочитать.
+            Со временем в нём появились оценки, рецензии и марафоны.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <span class="feature-icon">📚</span>
+              <div>
+                <div class="feature-title">Личная полка</div>
+                <div class="feature-desc">Можно раскладывать книги по разделам: читаю, прочитал, хочу прочитать.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔗</span>
+              <div>
+                <div class="feature-title">Добавление по ссылке</div>
+                <div class="feature-desc">Если не нашли нужную книгу, можно вставить ссылку с Litres или Goodreads — сервис сам подтянет данные.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">⭐</span>
+              <div>
+                <div class="feature-title">Оценки и рецензии</div>
+                <div class="feature-desc">К каждой книге можно оставить оценку и написать отзыв.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🏃</span>
+              <div>
+                <div class="feature-title">Марафоны</div>
+                <div class="feature-desc">Можно читать вместе с другими участниками и обсуждать книги внутри марафона.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <a href={`${import.meta.env.BASE_URL}/ru/tech-bookey`} class="btn-secondary">технические детали →</a>
+            <a href="https://bookey.ru/" target="_blank" rel="noopener" class="btn-primary">открыть сервис →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-inner">
+        <span class="muted">сделано с душой</span>
+        <a href="https://github.com/triador" target="_blank" rel="noopener">github.com/triador</a>
+      </div>
+    </footer>
+
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--green);
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .nav-links a {
+    color: var(--muted);
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+  }
+  .lang-active {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .sep {
+    color: var(--border);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 80px 0 60px;
+  }
+
+  .hero-label {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .accent {
+    color: var(--cyan);
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 520px;
+  }
+
+  /* ── Section ── */
+  .section {
+    padding: 64px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  /* ── Project card ── */
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .project-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .project-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .project-name a:hover {
+    color: var(--cyan);
+  }
+
+  .project-tagline {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .project-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--green);
+    font-size: 12px;
+    white-space: nowrap;
+    border: 1px solid var(--green);
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #3fb95010;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  /* ── Features ── */
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .feature-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: var(--text);
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .example-tags code {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--muted);
+  }
+
+  /* ── Project footer ── */
+  .project-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    background: var(--cyan);
+    color: #0d1117;
+    text-decoration: none;
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--muted);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .muted { color: var(--muted); }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .project-header {
+      flex-direction: column;
+    }
+    .project-footer {
+      justify-content: flex-start;
+    }
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

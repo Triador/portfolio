@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Terminal from '../../components/Terminal.astro';
+import Badge from '../../components/Badge.astro';
+
+const techStack = [
+  { name: 'Go', color: 'cyan' },
+  { name: 'SQLite', color: 'yellow' },
+  { name: 'Telegram Bot API', color: 'purple' },
+  { name: 'Webhooks', color: 'green' },
+  { name: 'WAL', color: 'orange' },
+] as const;
+---
+
+<Layout title="finance-manager — технические детали" description="Технические детали реализации Telegram-бота Finance Manager.">
+  <main>
+
+    <nav>
+      <a href={`${import.meta.env.BASE_URL}/ru/`} class="nav-logo">triador<span class="blink">_</span></a>
+      <div class="nav-links">
+        <a href={`${import.meta.env.BASE_URL}/ru/`}>← главная</a>
+        <a href="https://github.com/triador" target="_blank" rel="noopener">github</a>
+        <span class="lang-switch">
+          <span class="lang-active">RU</span>
+          <span class="sep">/</span>
+          <a href={`${import.meta.env.BASE_URL}/en/tech`}>EN</a>
+        </span>
+      </div>
+    </nav>
+
+    <section class="page-header">
+      <div class="container">
+        <p class="page-label"><span class="muted">~/projects/</span>finance-manager</p>
+        <h1 class="page-title">Технические детали</h1>
+        <p class="page-sub">Реализация Telegram-бота для учёта совместных расходов</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="block">
+          <h2 class="block-title"><span class="muted">##</span> stack</h2>
+          <div class="tech-badges">
+            {techStack.map(t => <Badge text={t.name} color={t.color} />)}
+          </div>
+        </div>
+
+        <div class="block">
+          <h2 class="block-title"><span class="muted">##</span> architecture</h2>
+          <Terminal title="request flow" lines={[
+            { text: '<span style="color:var(--muted)">// request flow</span>' },
+            { text: '' },
+            { text: 'Telegram  ──→  Webhook <span style="color:var(--muted)">(:58823)</span>' },
+            { text: '                  │' },
+            { text: '          ┌───────┴────────┐' },
+            { text: '          ↓                ↓' },
+            { text: '   <span style="color:var(--cyan)">Command Router</span>    <span style="color:var(--purple)">Callback Handler</span>' },
+            { text: '          │                │' },
+            { text: '          └───────┬────────┘' },
+            { text: '                  ↓' },
+            { text: '          <span style="color:var(--yellow)">SQLite (WAL mode)</span>' },
+            { text: '          <span style="color:var(--muted)">chats · members · debts · transactions</span>' },
+          ]} />
+        </div>
+
+        <div class="page-footer">
+          <a href={`${import.meta.env.BASE_URL}/ru/`} class="btn-secondary">← назад на главную</a>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-inner">
+        <span class="muted">// built with <span class="red">♥</span> using Astro · deployed on GitHub Pages</span>
+        <a href="https://github.com/triador" target="_blank" rel="noopener">github.com/triador</a>
+      </div>
+    </footer>
+
+  </main>
+</Layout>
+
+<style>
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border); padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .nav-logo:hover { text-decoration: none; }
+  .blink { animation: blink 1s step-end infinite; color: var(--green); }
+  @keyframes blink { 50% { opacity: 0; } }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: var(--muted); font-size: 13px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .lang-switch { display: flex; align-items: center; gap: 5px; font-size: 13px; }
+  .lang-active { color: var(--text); font-weight: 600; }
+  .sep { color: var(--border); }
+
+  .page-header { padding: 60px 0 40px; }
+  .page-label { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .page-title { font-size: clamp(22px, 4vw, 36px); font-weight: 700; margin-bottom: 10px; }
+  .page-sub { color: var(--muted); font-size: 14px; }
+
+  .section { padding: 0 0 64px; border-top: 1px solid var(--border); }
+  .block { padding-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+  .block-title { font-size: 18px; font-weight: 700; color: var(--text); }
+  .tech-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .page-footer { margin-top: 48px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-secondary {
+    display: inline-block; border: 1px solid var(--border); color: var(--muted);
+    padding: 8px 18px; border-radius: 6px; font-size: 13px; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--muted); color: var(--text); text-decoration: none; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px; }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px; font-size: 12px;
+  }
+  .muted { color: var(--muted); }
+  .red { color: var(--red); }
+
+  @media (max-width: 640px) {
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+</style>
