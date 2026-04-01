@@ -1,0 +1,76 @@
+---
+interface Props {
+  lines: { prompt?: boolean; text: string; color?: string }[];
+  title?: string;
+}
+const { lines, title = 'bash' } = Astro.props;
+---
+
+<div class="terminal">
+  <div class="terminal-bar">
+    <span class="dot red" />
+    <span class="dot yellow" />
+    <span class="dot green" />
+    <span class="terminal-title">{title}</span>
+  </div>
+  <div class="terminal-body">
+    {lines.map((line) => (
+      <div class="line" style={line.color ? `color: var(--${line.color})` : ''}>
+        {line.prompt && <span class="prompt">$ </span>}
+        <span set:html={line.text} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .terminal {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .terminal-bar {
+    background: var(--bg-card);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .dot.red    { background: #ff5f57; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green  { background: #28c840; }
+
+  .terminal-title {
+    margin-left: 8px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .terminal-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .line {
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt {
+    color: var(--green);
+    user-select: none;
+  }
+</style>
