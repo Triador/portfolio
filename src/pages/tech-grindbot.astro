@@ -13,47 +13,6 @@ const techStack = [
   { name: 'Liquibase', color: 'red' },
 ] as const;
 
-const features = [
-  {
-    icon: '📐',
-    title: 'Grid Strategy Engine',
-    desc: 'Calculates operating range from deposit, percent step, and quote per order. Places limit buy/sell orders at each grid level.',
-  },
-  {
-    icon: '🔄',
-    title: '8+ Recovery Modes',
-    desc: 'Handles price moving below/above grid, reversals, and partial fills. Each scenario has a dedicated recovery handler.',
-  },
-  {
-    icon: '📡',
-    title: 'WebSocket Order Tracking',
-    desc: 'Real-time order updates from Bybit via WebSocket. Events dispatched to typed handlers per order state.',
-  },
-  {
-    icon: '💰',
-    title: 'Flexible Deposits',
-    desc: 'Idle USDT automatically subscribed to Bybit lending products. Redeemed on demand when grid needs capital.',
-  },
-  {
-    icon: '🧾',
-    title: 'Commission Management',
-    desc: 'Buys commission tokens on strategy start. Tracks available commission throughout execution.',
-  },
-  {
-    icon: '🗄️',
-    title: 'Persistent State',
-    desc: 'Strategy state, order book, and partial fills persisted in PostgreSQL. Survives restarts without data loss.',
-  },
-];
-
-const stats = [
-  { label: 'Language', value: 'Java 21' },
-  { label: 'Framework', value: 'Spring Boot 3.4' },
-  { label: 'Database', value: 'PostgreSQL 16' },
-  { label: 'Exchange', value: 'Bybit' },
-  { label: 'Port', value: ':8092' },
-  { label: 'Container', value: 'Docker (Alpine)' },
-];
 ---
 
 <Layout title="grindbot — technical details" description="Technical implementation details for the Bybit grid trading bot.">
@@ -114,72 +73,6 @@ const stats = [
             { text: '                              ↓' },
             { text: '                   <span style="color:var(--yellow)">PostgreSQL</span>' },
             { text: '        <span style="color:var(--muted)">strategy · order_book · partial_fills</span>' },
-          ]} />
-        </div>
-
-        <!-- Stats -->
-        <div class="block">
-          <h2 class="block-title"><span class="muted">##</span> stats</h2>
-          <div class="stats-grid">
-            {stats.map(s => (
-              <div class="stat-item">
-                <span class="stat-label">{s.label}</span>
-                <span class="stat-value">{s.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Features -->
-        <div class="block">
-          <h2 class="block-title"><span class="muted">##</span> features</h2>
-          <div class="features-grid">
-            {features.map(f => (
-              <div class="feature-item">
-                <div class="feature-icon">{f.icon}</div>
-                <div>
-                  <div class="feature-title">{f.title}</div>
-                  <div class="feature-desc">{f.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Grid strategy highlight -->
-        <div class="block">
-          <h2 class="block-title"><span class="muted">##</span> grid strategy example</h2>
-          <div class="algo-block">
-            <div class="algo-title">
-              <span class="muted">// </span>BTC/USDT · deposit 1000 USDT · step 0.5% · 100 USDT per order
-            </div>
-            <div class="algo-body">
-              <p><span class="muted">// price at start: 100 000 USDT</span></p>
-              <p></p>
-              <p><span class="cyan">sell</span> @ <span class="yellow">100 500</span>  <span class="muted">// +0.5%</span></p>
-              <p><span class="cyan">sell</span> @ <span class="yellow">101 005</span>  <span class="muted">// +1.0%</span></p>
-              <p><span class="green">◆ current price</span></p>
-              <p><span class="purple">buy</span> &nbsp;@ <span class="yellow">99 500</span>   <span class="muted">// -0.5%</span></p>
-              <p><span class="purple">buy</span> &nbsp;@ <span class="yellow">99 003</span>   <span class="muted">// -1.0%</span></p>
-              <p></p>
-              <p><span class="muted">// buy fills → new sell placed one level above</span></p>
-              <p><span class="muted">// sell fills → new buy placed one level below</span></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- API -->
-        <div class="block">
-          <h2 class="block-title"><span class="muted">##</span> api</h2>
-          <Terminal title="REST endpoints" lines={[
-            { prompt: true, text: 'POST /api/strategy/start' },
-            { text: '<span style="color:var(--muted)">// start grid trading with params</span>' },
-            { text: '' },
-            { prompt: true, text: 'POST /api/strategy/{id}/stop' },
-            { text: '<span style="color:var(--muted)">// gracefully halt strategy</span>' },
-            { text: '' },
-            { prompt: true, text: 'POST /api/strategy/{id}/recover' },
-            { text: '<span style="color:var(--muted)">// recover when price leaves grid bounds</span>' },
           ]} />
         </div>
 
