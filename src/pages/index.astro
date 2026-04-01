@@ -20,8 +20,8 @@ import Layout from '../layouts/Layout.astro';
         <p class="hero-label">👋 привет</p>
         <h1 class="hero-title">Я <span class="accent">triador</span></h1>
         <p class="hero-sub">
-          Делаю продукты, которые экономят время мне.<br/>
-          Возможно, сэкономят и вам.
+          Делаю проекты, которые упрощают мне жизнь.<br/>
+          Возможно, они будут полезны и кому-то ещё.
         </p>
       </div>
     </section>
@@ -34,8 +34,8 @@ import Layout from '../layouts/Layout.astro';
         <div class="project-card">
           <div class="project-header">
             <div>
-              <h3 class="project-name">Finance Manager</h3>
-              <p class="project-tagline">Бот в Telegram для учёта общих расходов</p>
+              <h3 class="project-name"><a href="https://t.me/TriadorFinanceManagerBot" target="_blank" rel="noopener">Finance Manager</a></h3>
+              <p class="project-tagline">Бот в Telegram для совместных расходов</p>
             </div>
             <div class="project-badge">
               <span class="status-dot"></span> работает
@@ -43,55 +43,49 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <p class="project-desc">
-            Ходили с друзьями в кафе или снимали квартиру вскладчину?
-            Этот бот сам считает, кто кому сколько должен.
-            Один заплатил за всех — просто скажи боту, и он всё распределит.
-            Никаких таблиц Excel, никакой путаницы в переписке.
+            Я сделал этого бота, чтобы упростить учёт совместных трат, когда мы путешествуем с друзьями, ходим куда-то вместе или просто делим общие расходы.
+            Удобнее всего пользоваться ботом добавив его в групповой чат.
           </p>
 
           <div class="features-list">
             <div class="feature-item">
               <span class="feature-icon">💸</span>
               <div>
-                <div class="feature-title">Записывает расходы</div>
-                <div class="feature-desc">Кто заплатил, за кого и сколько — всё фиксируется в одном месте.</div>
+                <div class="feature-title">Учитывает расходы</div>
+                <div class="feature-desc">
+                  Можно просто отправить сумму или сумму с комментарием:
+                  <span class="example-tags">
+                    <code>1500</code><code>39.90 такси</code><code>24 + 32 + 20 кафе</code>
+                  </span>
+                </div>
               </div>
             </div>
             <div class="feature-item">
-              <span class="feature-icon">⚖️</span>
+              <span class="feature-icon">🧾</span>
               <div>
-                <div class="feature-title">Делит по-честному</div>
-                <div class="feature-desc">Один купил — расходы поровну на всех. Копейка в копейку.</div>
+                <div class="feature-title">Распознаёт чеки</div>
+                <div class="feature-desc">Можно отправить фото чека и не вбивать покупки вручную.</div>
               </div>
             </div>
             <div class="feature-item">
               <span class="feature-icon">🔁</span>
               <div>
-                <div class="feature-title">Убирает лишние долги</div>
-                <div class="feature-desc">Если Вася должен Пете, а Петя — Васе, бот сам это заметит и зачтёт.</div>
-              </div>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">📊</span>
-              <div>
-                <div class="feature-title">Показывает картину целиком</div>
-                <div class="feature-desc">В любой момент видно, кто кому и сколько должен в группе.</div>
+                <div class="feature-title">Убирает лишние переводы</div>
+                <div class="feature-desc">Оптимизирует долги так, чтобы между участниками было меньше лишних переводов.</div>
               </div>
             </div>
             <div class="feature-item">
               <span class="feature-icon">📅</span>
               <div>
-                <div class="feature-title">Помнит историю</div>
-                <div class="feature-desc">Все операции сохраняются. Можно посмотреть расходы за любой месяц.</div>
+                <div class="feature-title">Хранит историю расходов</div>
+                <div class="feature-desc">Можно посмотреть расходы за любой месяц.</div>
               </div>
             </div>
           </div>
 
           <div class="project-footer">
             <a href={`${import.meta.env.BASE_URL}/tech`} class="btn-secondary">технические детали →</a>
-            <a href="https://github.com/triador/finance-manager" target="_blank" rel="noopener" class="btn-outline">
-              исходный код →
-            </a>
+            <a href="https://t.me/TriadorFinanceManagerBot" target="_blank" rel="noopener" class="btn-primary">открыть бота →</a>
           </div>
         </div>
 
@@ -99,7 +93,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="project-card">
           <div class="project-header">
             <div>
-              <h3 class="project-name">Grindbot</h3>
+              <h3 class="project-name"><a href="https://t.me/GridTeamBot" target="_blank" rel="noopener">Grindbot</a></h3>
               <p class="project-tagline">Торговый бот для биржи Bybit</p>
             </div>
             <div class="project-badge">
@@ -108,44 +102,29 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <p class="project-desc">
-            Бот, который торгует криптовалютой вместо вас — пока вы спите или занимаетесь своими делами.
-            Он расставляет ордера на покупку и продажу по сетке цен и зарабатывает на колебаниях курса.
-            Не нужно следить за рынком: бот сам реагирует на движение цены и перестраивается.
+            Я сделал этого бота, чтобы автоматизировать торговлю на криптовалютных биржах и не следить за рынком вручную.
           </p>
 
           <div class="features-list">
             <div class="feature-item">
-              <span class="feature-icon">📐</span>
+              <span class="feature-icon">📊</span>
               <div>
-                <div class="feature-title">Сеточная стратегия</div>
-                <div class="feature-desc">Покупает дешевле, продаёт дороже — снова и снова, на каждом колебании цены.</div>
+                <div class="feature-title">Работает по сетке</div>
+                <div class="feature-desc">Выставляет ордера на покупку и продажу по уровням в рамках сеточной стратегии.</div>
               </div>
             </div>
             <div class="feature-item">
-              <span class="feature-icon">🔄</span>
+              <span class="feature-icon">🏦</span>
               <div>
-                <div class="feature-title">Адаптируется к рынку</div>
-                <div class="feature-desc">Если цена уходит за пределы сетки, бот перестраивает позиции и продолжает работу.</div>
-              </div>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">💤</span>
-              <div>
-                <div class="feature-title">Работает круглосуточно</div>
-                <div class="feature-desc">Не устаёт, не отвлекается и не пропускает сделки. Биржа никогда не спит — бот тоже.</div>
-              </div>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">💰</span>
-              <div>
-                <div class="feature-title">Деньги не простаивают</div>
-                <div class="feature-desc">Свободные средства отправляются в накопительный продукт биржи и продолжают работать.</div>
+                <div class="feature-title">Использует свободные средства</div>
+                <div class="feature-desc">Свободную часть баланса хранит на накопительном продукте биржи, чтобы максимизировать доход.</div>
               </div>
             </div>
           </div>
 
           <div class="project-footer">
             <a href={`${import.meta.env.BASE_URL}/tech-grindbot`} class="btn-secondary">технические детали →</a>
+            <a href="https://t.me/GridTeamBot" target="_blank" rel="noopener" class="btn-primary">открыть бота →</a>
           </div>
         </div>
 
@@ -153,7 +132,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="project-card">
           <div class="project-header">
             <div>
-              <h3 class="project-name">Bookey</h3>
+              <h3 class="project-name"><a href="https://bookey.ru/" target="_blank" rel="noopener">Bookey</a></h3>
               <p class="project-tagline">Сервис для ведения списка книг</p>
             </div>
             <div class="project-badge">
@@ -162,9 +141,8 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <p class="project-desc">
-            Личная полка в интернете: добавляй книги, отмечай прочитанные, оставляй заметки и отзывы.
-            Можно искать книги через Google Books, импортировать с Litres и Goodreads,
-            а ещё участвовать в марафонах чтения вместе с другими.
+            Я сделал этот сервис, чтобы вести список книг — что читаю, что уже прочитал и что хочу прочитать.
+            Со временем в нём появились оценки, рецензии и марафоны.
           </p>
 
           <div class="features-list">
@@ -172,34 +150,35 @@ import Layout from '../layouts/Layout.astro';
               <span class="feature-icon">📚</span>
               <div>
                 <div class="feature-title">Личная полка</div>
-                <div class="feature-desc">Читаю, прочитал, хочу прочитать — книги разложены по разделам.</div>
+                <div class="feature-desc">Можно раскладывать книги по разделам: читаю, прочитал, хочу прочитать.</div>
               </div>
             </div>
             <div class="feature-item">
-              <span class="feature-icon">🔍</span>
+              <span class="feature-icon">🔗</span>
               <div>
-                <div class="feature-title">Поиск и импорт</div>
-                <div class="feature-desc">Ищи через Google Books или добавляй прямо со страницы книги на Litres и Goodreads.</div>
+                <div class="feature-title">Добавление по ссылке</div>
+                <div class="feature-desc">Если не нашли нужную книгу, можно вставить ссылку с Litres или Goodreads — сервис сам подтянет данные.</div>
               </div>
             </div>
             <div class="feature-item">
               <span class="feature-icon">⭐</span>
               <div>
-                <div class="feature-title">Отзывы и оценки</div>
-                <div class="feature-desc">Ставь оценки, пиши рецензии и личные заметки к каждой книге.</div>
+                <div class="feature-title">Оценки и рецензии</div>
+                <div class="feature-desc">К каждой книге можно оставить оценку и написать отзыв.</div>
               </div>
             </div>
             <div class="feature-item">
               <span class="feature-icon">🏃</span>
               <div>
-                <div class="feature-title">Марафоны чтения</div>
-                <div class="feature-desc">Читай книги вместе с другими участниками, обсуждай прямо внутри марафона.</div>
+                <div class="feature-title">Марафоны</div>
+                <div class="feature-desc">Можно читать вместе с другими участниками и обсуждать книги внутри марафона.</div>
               </div>
             </div>
           </div>
 
           <div class="project-footer">
             <a href={`${import.meta.env.BASE_URL}/tech-bookey`} class="btn-secondary">технические детали →</a>
+            <a href="https://bookey.ru/" target="_blank" rel="noopener" class="btn-primary">открыть сервис →</a>
           </div>
         </div>
 
@@ -341,6 +320,13 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 700;
     color: var(--text);
   }
+  .project-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .project-name a:hover {
+    color: var(--cyan);
+  }
 
   .project-tagline {
     color: var(--muted);
@@ -412,6 +398,23 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1.6;
   }
 
+  .example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .example-tags code {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--muted);
+  }
+
   /* ── Project footer ── */
   .project-footer {
     display: flex;
@@ -432,6 +435,22 @@ import Layout from '../layouts/Layout.astro';
   .btn-outline:hover {
     border-color: var(--cyan);
     color: var(--cyan);
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    background: var(--cyan);
+    color: #0d1117;
     text-decoration: none;
   }
 
