@@ -190,6 +190,21 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </section>
 
+    <!-- COFFEE -->
+    <section class="section coffee-section">
+      <div class="container">
+        <p class="coffee-text">
+          If any of these turned out useful — feel free to buy me a coffee ☕
+        </p>
+        <div class="coffee-items">
+          <div class="coffee-item">
+            <span class="coffee-label">USDT (TON)</span>
+            <code class="coffee-addr">UQCVRBwdjVFDj1XZa412b0y1H8seJjx9tWLCyza_qorVau36</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
       <div class="container footer-inner">
@@ -479,6 +494,42 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   .muted { color: var(--muted); }
+
+  /* ── Coffee ── */
+  .coffee-section {
+    padding: 40px 0;
+  }
+  .coffee-text {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .coffee-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .coffee-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .coffee-label {
+    font-size: 13px;
+    color: var(--muted);
+    min-width: 100px;
+  }
+  .coffee-addr {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    word-break: break-all;
+  }
 
   /* ── Responsive ── */
   @media (max-width: 640px) {
