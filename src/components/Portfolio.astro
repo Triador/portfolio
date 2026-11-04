@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { projects, type Language } from '../data/projects';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const t = (ru: string, en: string) => lang === 'ru' ? ru : en;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title={t('triador — мои проекты', 'triador — personal projects')} description={t('Проекты triador: Lexqora, Numqora, Bookey, Grindbot и Azimqora.', 'Projects by triador: Lexqora, Numqora, Bookey, Grindbot and Azimqora.')}>
+  <a class="skip" href="#projects">{t('К проектам', 'Skip to projects')}</a>
+  <header class="wrap nav">
+    <a class="wordmark" href={`${base}/${lang}/`} aria-label={t('triador — главная', 'triador — home')}>triador<span aria-hidden="true">.</span></a>
+    <nav aria-label={t('Навигация', 'Navigation')}>
+      <div class="languages" aria-label={t('Язык сайта', 'Site language')}>
+        <a href={`${base}/ru/`} lang="ru" aria-current={lang === 'ru' ? 'page' : undefined}>RU</a>
+        <a href={`${base}/en/`} lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+      </div>
+    </nav>
+  </header>
+  <main class="wrap">
+    <h1>{t('Мои проекты', 'My projects')}</h1>
+    <div class="projects" id="projects">
+      {projects.map(project => (
+        <article class={`project ${project.id}`} aria-labelledby={`${project.id}-title`}>
+          <a class="project-main" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${t('Открыть', 'Open')} ${project.name}`} aria-describedby={`${project.id}-summary`}>
+            <div class="project-heading">
+              <span class="logo"><Image src={project.logo} width={64} height={64} format={project.id === 'bookey' ? undefined : 'webp'} alt="" loading="eager" /></span>
+              <h2 id={`${project.id}-title`}>{project.name}</h2>
+              <span class="launch-arrow" aria-hidden="true">↗</span>
+            </div>
+            <p id={`${project.id}-summary`}>{project.summary[lang]}</p>
+          </a>
+          <a class="project-details" href={`${base}/${lang}/${project.route}/`}>{t('Как устроено', 'Under the hood')} <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
+    </div>
+    <footer>
+      <details class="coffee">
+        <summary>{t('Угостить кофе', 'Buy me a coffee')} <span aria-hidden="true">↗</span></summary>
+        <div class="coffee-content"><span>USDT · TON</span><code>UQCVRBwdjVFDj1XZa412b0y1H8seJjx9tWLCyza_qorVau36</code><span>{t('Т-Банк', 'T-Bank')}</span><code>5536914115073797</code></div>
+      </details>
+    </footer>
+  </main>
+</Layout>
+<style>
+  .wrap { max-width: 1032px; margin: auto; padding: 0 32px; }
+  .skip { position: fixed; top: -100px; left: 16px; z-index: 5; background: white; padding: 12px 20px; border-radius: 24px; }
+  .skip:focus { top: 12px; }
+  .nav { min-height: 100px; display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-size: 26px; font-weight: 800; line-height: 1; }
+  .wordmark span { color: #858a90; }
+  nav, .languages { display: flex; align-items: center; }
+  nav { gap: 28px; font-size: 12px; font-weight: 600; }
+  .languages { gap: 2px; }
+  .languages a { min-width: 40px; min-height: 40px; border-radius: 24px; display: grid; place-items: center; color: #686d74; }
+  .languages [aria-current] { background: #eceef0; color: #17191c; }
+  h1 { margin: 56px 0 42px; font-size: 40px; line-height: 1.25; font-weight: 600; }
+  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .project { display: flex; flex-direction: column; background: #e7eee7; border-radius: 24px; padding: 30px; transition: background .2s; }
+  .project:hover { background: #dfe9df; }
+  /* Project brand cues: mint, gold, turquoise, navy and warm red. */
+  .numqora { background: #f3ead9; }
+  .numqora:hover { background: #ece0cb; }
+  .bookey { background: #e3f0ef; }
+  .bookey:hover { background: #d9eae8; }
+  .grindbot { background: #0d1726; color: #f1f5fa; }
+  .grindbot:hover { background: #142137; }
+  .azimqora { background: #f8e9e5; }
+  .azimqora:hover { background: #f2dfd9; }
+  .project-main { display: block; flex: 1; border-radius: 12px; }
+  .project-heading { display: flex; align-items: center; gap: 17px; }
+  .logo { width: 64px; height: 64px; border-radius: 17px; overflow: hidden; flex-shrink: 0; display: grid; place-items: center; }
+  .logo img { display: block; width: 64px; height: 64px; object-fit: cover; }
+  .bookey .logo { background: #e0eeec; }
+  .bookey .logo img { width: 36px; height: 42px; object-fit: contain; }
+  h2 { font-size: 21px; font-weight: 700; }
+  .launch-arrow { margin-left: auto; font-size: 22px; color: #767d84; transition: transform .2s; }
+  .project-main:hover .launch-arrow { transform: translate(2px, -2px); color: #17191c; }
+  .project-main p { color: #61676c; font-size: 15px; line-height: 1.75; margin: 22px 0 14px; max-width: 330px; min-height: 53px; }
+  .project-details { display: inline-flex; align-self: flex-start; align-items: center; min-height: 44px; gap: 10px; font-size: 12px; color: #596168; }
+  .project-details:hover { color: #17191c; text-decoration: underline; text-underline-offset: 4px; }
+  .grindbot .project-main p { color: #b3c2d5; }
+  .grindbot .launch-arrow, .grindbot .project-details { color: #c0d3e8; }
+  .grindbot .project-main:hover .launch-arrow, .grindbot .project-details:hover { color: #f1f5fa; }
+  .grindbot a:focus-visible { outline-color: #89c5fa; }
+  footer { padding: 32px 0 36px; display: flex; justify-content: flex-end; }
+  .coffee { max-width: 100%; }
+  .coffee summary { cursor: pointer; list-style: none; font-size: 12px; color: #686d74; padding: 12px 0; text-align: right; }
+  .coffee summary::-webkit-details-marker { display: none; }
+  .coffee summary span { margin-left: 6px; }
+  .coffee-content { padding: 22px; background: #f0f1f2; border-radius: 16px; max-width: 450px; }
+  .coffee-content > span { display: block; font-size: 11px; color: #686d74; }
+  .coffee-content > span:not(:first-child) { margin-top: 18px; }
+  .coffee-content code { font-size: 11px; overflow-wrap: anywhere; user-select: all; }
+  @media (max-width: 700px) {
+    .wrap { padding: 0 22px; }
+    .nav { min-height: 82px; }
+    .wordmark { font-size: 24px; }
+    nav { gap: 18px; }
+    h1 { font-size: 30px; margin: 34px 0 28px; max-width: 310px; }
+    .projects { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .project { padding: 24px; border-radius: 22px; }
+    .project-heading { gap: 14px; }
+    h2 { font-size: 20px; }
+    .logo, .logo img { width: 56px; height: 56px; }
+    .logo { border-radius: 15px; }
+    .bookey .logo img { width: 31px; height: 36px; }
+    .project-main p { font-size: 14px; margin: 18px 0 8px; min-height: 0; }
+    footer { padding-top: 18px; }
+  }
+</style>

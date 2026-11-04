@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Badge from './Badge.astro';
+import Terminal from './Terminal.astro';
+import { projects, type Language } from '../data/projects';
+interface Props { lang: Language; projectId: string }
+const { lang, projectId } = Astro.props;
+const project = projects.find(p => p.id === projectId);
+if (!project) throw new Error(`Unknown project: ${projectId}`);
+const t = (ru: string, en: string) => lang === 'ru' ? ru : en;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title={`${project.name} — ${t('как устроено', 'under the hood')}`} description={project.summary[lang]}>
+  <main class="technical">
+    <nav aria-label={t('Навигация', 'Navigation')}>
+      <a class="nav-logo" href={`${base}/${lang}/`}>triador.</a>
+      <div class="nav-links"><a href={`${base}/${lang}/`}>{t('← проекты', '← projects')}</a><div class="lang-switch"><a href={`${base}/ru/${project.route}/`} lang="ru" aria-current={lang === 'ru' ? 'page' : undefined}>RU</a><a href={`${base}/en/${project.route}/`} lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a></div></div>
+    </nav>
+    <div class="container">
+      <header class="detail-header">
+        <span class={`detail-logo ${project.id}`}><Image src={project.logo} width={64} height={64} format={project.id === 'bookey' ? undefined : 'webp'} alt="" /></span>
+        <h1>{project.name}</h1>
+      </header>
+      <p class="about">{project.about[lang]}</p>
+      <section class="block" aria-label={t('Технологии', 'Technology')}><div class="tech-badges">{project.stack.map(name => <Badge text={name} />)}</div></section>
+      <section class="block" aria-label={t('Архитектура', 'Architecture')}><Terminal title={t('Архитектура', 'Architecture')} lines={project.architecture[lang].split('\n').map(text => ({ text }))} /></section>
+      <div class="detail-actions"><a class="open" href={project.url} target="_blank" rel="noopener noreferrer">{t('Открыть', 'Open')} {project.name} <span aria-hidden="true">↗</span></a><a class="back" href={`${base}/${lang}/`}>{t('Все проекты', 'All projects')} <span aria-hidden="true">→</span></a></div>
+    </div>
+  </main>
+</Layout>
+<style>
+  .detail-header { display: flex; align-items: center; gap: 22px; margin: 55px 0 28px; }
+  .detail-header h1 { font-size: 38px; line-height: 1.2; font-weight: 650; }
+  .detail-logo { width: 64px; height: 64px; border-radius: 17px; overflow: hidden; flex-shrink: 0; display: grid; place-items: center; }
+  .detail-logo img { width: 64px; height: 64px; object-fit: cover; }
+  .bookey { background: #e0eeec; }
+  .bookey img { width: 36px; height: 42px; object-fit: contain; }
+  .about { max-width: 740px; color: #62686e; font-size: 16px; line-height: 1.9; }
+  .detail-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 28px; margin: 38px 0 64px; }
+  .open { background: #17191c; color: white; padding: 12px 22px; border-radius: 30px; font-size: 13px; }
+  .open span { margin-left: 16px; }
+  .back { color: #686d74; font-size: 13px; padding: 12px 0; }
+  .back span { margin-left: 10px; }
+  :global(.technical .lang-switch [aria-current]) { color: #17191c; font-weight: 800; }
+  @media (max-width: 600px) {
+    .detail-header { margin-top: 32px; gap: 18px; }
+    .detail-header h1 { font-size: 30px; }
+    .about { font-size: 14px; }
+  }
+</style>

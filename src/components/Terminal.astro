@@ -13,7 +13,7 @@ const { lines, title = 'bash' } = Astro.props;
     <span class="dot green" />
     <span class="terminal-title">{title}</span>
   </div>
-  <div class="terminal-body">
+  <div class="terminal-body" tabindex="0" role="region" aria-label={title}>
     {lines.map((line) => (
       <div class="line" style={line.color ? `color: var(--${line.color})` : ''}>
         {line.prompt && <span class="prompt">$ </span>}
@@ -25,6 +25,17 @@ const { lines, title = 'bash' } = Astro.props;
 
 <style>
   .terminal {
+    --text: #e6edf3;
+    --muted: #9ca6b2;
+    --cyan: #95c9ed;
+    --green: #96c9a3;
+    --yellow: #d8c58e;
+    --purple: #c7b4dc;
+    --red: #e4a298;
+    --orange: #ddb68c;
+    --bg-card: #23282d;
+    --border: #383e44;
+    font-family: 'Cascadia Code', Consolas, monospace;
     background: #010409;
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -57,6 +68,7 @@ const { lines, title = 'bash' } = Astro.props;
   }
 
   .terminal-body {
+    overflow-x: auto;
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
@@ -65,8 +77,8 @@ const { lines, title = 'bash' } = Astro.props;
 
   .line {
     color: var(--text);
-    white-space: pre-wrap;
-    word-break: break-word;
+    white-space: pre;
+    min-width: max-content;
   }
 
   .prompt {

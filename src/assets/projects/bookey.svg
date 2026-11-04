@@ -1,0 +1,17 @@
+<svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g style="mix-blend-mode:multiply">
+    <path d="M0 5L12 9.6V28L0 23.4V5Z" fill="url(#paint0_linear)"/>
+  </g>
+  <g style="mix-blend-mode:multiply">
+    <path d="M24 5L12 9.6V28L24 23.4V5Z" fill="#7ADFD9"/>
+  </g>
+  <g style="mix-blend-mode:multiply">
+    <circle cx="12" cy="3" r="3" fill="#A0B2E8"/>
+  </g>
+  <defs>
+    <linearGradient id="paint0_linear" x1="6" y1="25.5" x2="7.5" y2="11" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9CC42"/>
+      <stop offset="1" stop-color="#FD9754"/>
+    </linearGradient>
+  </defs>
+</svg>

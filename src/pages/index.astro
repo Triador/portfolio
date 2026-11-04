@@ -1,15 +1,17 @@
 ---
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>triador — personal projects</title>
   <noscript><meta http-equiv="refresh" content={`0;url=${base}/ru/`} /></noscript>
   <script define:vars={{ base }}>
     const lang = navigator.language?.toLowerCase().startsWith('ru') ? 'ru' : 'en';
     window.location.replace(base + '/' + lang + '/');
   </script>
 </head>
-<body></body>
+<body><noscript><a href={`${base}/ru/`}>Русский</a> · <a href={`${base}/en/`}>English</a></noscript></body>
 </html>
