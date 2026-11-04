@@ -1,0 +1,106 @@
+---
+import type { Language } from '../data/projects';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const t = (ru: string, en: string) => lang === 'ru' ? ru : en;
+const wallet = 'UQCVRBwdjVFDj1XZa412b0y1H8seJjx9tWLCyza_qorVau36';
+const card = '5536914115073797';
+const methods = [
+  { label: 'USDT · TON', value: wallet, copyLabel: t('Скопировать адрес USDT в сети TON', 'Copy the USDT address on TON'), wallet: true },
+  { label: t('Т-Банк', 'T-Bank'), value: card, copyLabel: t('Скопировать номер карты Т-Банка', 'Copy the T-Bank card number'), wallet: false },
+];
+---
+<details class="support" data-support>
+  <summary>
+    {t('Угостить кофе', 'Buy me a coffee')}
+    <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
+  </summary>
+  <div class="payment-methods">
+    {methods.map(method => (
+      <div class="payment-method" data-method>
+        <div class="method-details">
+          <div class="method-heading"><span>{method.label}</span><span class="copy-feedback" aria-hidden="true">{t('Скопировано', 'Copied')}</span></div>
+          <code class:list={['method-value', { 'wallet-address': method.wallet }]}>{method.wallet ? <>{wallet.slice(0, 24)}<wbr />{wallet.slice(24)}</> : card.match(/.{4}/g)?.join(' ')}</code>
+        </div>
+        <button type="button" class="copy-button" data-copy={method.value} data-copy-label={method.copyLabel} data-copied-label={t('Скопировано', 'Copied')} aria-label={method.copyLabel} title={method.copyLabel} hidden>
+          <svg class="copy-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>
+          <svg class="check-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+        </button>
+      </div>
+    ))}
+    <p class="copy-error" data-copy-error hidden>{t('Не удалось скопировать. Можно выделить реквизиты вручную.', 'Could not copy. You can select the details manually.')}</p>
+  </div>
+  <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+</details>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-support]').forEach(support => {
+    const status = support.querySelector<HTMLElement>('[data-copy-status]');
+    const error = support.querySelector<HTMLElement>('[data-copy-error]');
+    const timers = new Map<HTMLButtonElement, ReturnType<typeof setTimeout>>();
+
+    support.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach(button => {
+      button.hidden = false;
+      button.addEventListener('click', async () => {
+        const method = button.closest<HTMLElement>('[data-method]');
+        const value = button.dataset.copy;
+        if (!method || !value) return;
+
+        try {
+          await navigator.clipboard.writeText(value);
+          if (error) error.hidden = true;
+          const previousTimer = timers.get(button);
+          if (previousTimer) clearTimeout(previousTimer);
+          method.dataset.state = 'copied';
+          button.title = button.dataset.copiedLabel ?? '';
+          button.setAttribute('aria-label', button.dataset.copiedLabel ?? '');
+          if (status) status.textContent = `${method.querySelector('.method-heading > span')?.textContent}: ${button.dataset.copiedLabel}`;
+          timers.set(button, setTimeout(() => {
+            delete method.dataset.state;
+            button.title = button.dataset.copyLabel ?? '';
+            button.setAttribute('aria-label', button.dataset.copyLabel ?? '');
+            timers.delete(button);
+          }, 2400));
+        } catch {
+          if (error) error.hidden = false;
+          if (status && error) status.textContent = error.textContent;
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .support { width: 100%; max-width: 468px; }
+  summary { display: flex; align-items: center; justify-content: flex-end; gap: 9px; width: fit-content; margin-left: auto; min-height: 44px; padding: 10px 0 10px 12px; cursor: pointer; list-style: none; font-size: 13px; color: #62696e; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: #17191c; }
+  .chevron { flex-shrink: 0; transition: transform .2s; }
+  .support[open] .chevron { transform: rotate(180deg); }
+  .payment-methods { margin-top: 10px; border: 1px solid #e1e4e5; border-radius: 22px; background: #fff; box-shadow: 0 12px 28px -22px #20262c36; overflow: hidden; }
+  .payment-method { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 21px 22px; }
+  .payment-method + .payment-method { border-top: 1px solid #eceeef; }
+  .method-details { min-width: 0; }
+  .method-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12px; font-weight: 500; line-height: 1.5; color: #686d74; }
+  .copy-feedback { opacity: 0; color: #247357; font-size: 11px; transition: opacity .15s; }
+  .method-value { display: block; margin-top: 7px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 16px; font-weight: 400; line-height: 1.65; color: #252a2e; user-select: all; font-variant-numeric: tabular-nums; }
+  .wallet-address { font-size: 12.5px; overflow-wrap: anywhere; }
+  .copy-button { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 0; border-radius: 13px; background: #f3f5f4; color: #646e69; cursor: pointer; transition: background .15s, color .15s; }
+  .copy-button[hidden] { display: none; }
+  .copy-button:hover { color: #1d4634; background: #e8efeb; }
+  .copy-button svg { grid-area: 1 / 1; }
+  .check-icon { opacity: 0; }
+  [data-state="copied"] .copy-feedback, [data-state="copied"] .check-icon { opacity: 1; }
+  [data-state="copied"] .copy-icon { opacity: 0; }
+  [data-state="copied"] .copy-button { color: #247357; background: #e5f1e9; }
+  .copy-error { margin: 0; padding: 0 22px 20px; font-size: 12px; line-height: 1.6; color: #a33d36; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+  @media (max-width: 700px) {
+    .payment-method { gap: 12px; padding: 18px; }
+    .wallet-address { font-size: 12px; }
+    .copy-error { padding-right: 18px; padding-left: 18px; }
+  }
+  @media (max-width: 360px) {
+    .payment-method { gap: 8px; padding-right: 16px; padding-left: 16px; }
+  }
+</style>

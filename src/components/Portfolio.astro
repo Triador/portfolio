@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Support from './Support.astro';
 import { projects, type Language } from '../data/projects';
 interface Props { lang: Language }
 const { lang } = Astro.props;
@@ -36,10 +37,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       ))}
     </div>
     <footer>
-      <details class="coffee">
-        <summary>{t('Угостить кофе', 'Buy me a coffee')} <span aria-hidden="true">↗</span></summary>
-        <div class="coffee-content"><span>USDT · TON</span><code>UQCVRBwdjVFDj1XZa412b0y1H8seJjx9tWLCyza_qorVau36</code><span>{t('Т-Банк', 'T-Bank')}</span><code>5536914115073797</code></div>
-      </details>
+      <Support lang={lang} />
     </footer>
   </main>
 </Layout>
@@ -85,14 +83,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .grindbot .project-main:hover .launch-arrow, .grindbot .project-details:hover { color: #f1f5fa; }
   .grindbot a:focus-visible { outline-color: #89c5fa; }
   footer { padding: 32px 0 36px; display: flex; justify-content: flex-end; }
-  .coffee { max-width: 100%; }
-  .coffee summary { cursor: pointer; list-style: none; font-size: 12px; color: #686d74; padding: 12px 0; text-align: right; }
-  .coffee summary::-webkit-details-marker { display: none; }
-  .coffee summary span { margin-left: 6px; }
-  .coffee-content { padding: 22px; background: #f0f1f2; border-radius: 16px; max-width: 450px; }
-  .coffee-content > span { display: block; font-size: 11px; color: #686d74; }
-  .coffee-content > span:not(:first-child) { margin-top: 18px; }
-  .coffee-content code { font-size: 11px; overflow-wrap: anywhere; user-select: all; }
   @media (max-width: 700px) {
     .wrap { padding: 0 22px; }
     .nav { min-height: 82px; }
