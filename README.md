@@ -4,7 +4,7 @@ Static Astro portfolio published at https://triador.github.io/portfolio/.
 Russian and English pages share project descriptions in `src/data/projects.ts`
 and the layout in `src/components/Portfolio.astro`. Project logos live in
 `src/assets/projects/`; implementation details use `ProjectDetails.astro`.
-The support panel and its clipboard feedback live in `src/components/Support.astro`.
+The header coffee button, payment panel and clipboard feedback live in `src/components/Support.astro`.
 
 ## Local development
 
